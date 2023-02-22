@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{ user.username }}
+{% endblock %}
+
+{% block main %}
+    {% if user|length > 0 %}
+        <h1>Profile: {{ user.username }}</h1>
+        {% if pb is not none %}
+            <h2>PB: {{pb}} </h2>
+        {% endif %}
+    {% endif %}
+{% endblock %}
