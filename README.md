@@ -49,7 +49,7 @@ In the future I plan to add support for more puzzles so that users can compete i
 ##### Timer Integration
 I plan to allow users to use a timer on the website instead of using a StackMat or mobile timer.
 
-##### ~~ Personal best times ~~ (Now Avaliable)
+##### ~~Personal best times~~ (Now Avaliable)
 I plan to allow users to see their's or other's PB solves.
 
 ###### User Profiles/Friends
