@@ -10,5 +10,6 @@
         {% if pb is not none %}
             <h2>PB: {{pb}} </h2>
         {% endif %}
+        <button class="btn btn-primary" onclick="copyToClip('/users/{{user.id}}')">Copy Share Link</button>
     {% endif %}
 {% endblock %}

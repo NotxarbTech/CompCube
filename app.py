@@ -201,7 +201,7 @@ def user_profile(user_id):
     except ValueError:
         redirect(url_for('index'))
 
-    user = db.execute('SELECT username FROM users WHERE id = ?', user_id)
+    user = db.execute('SELECT username, id FROM users WHERE id = ?', user_id)
 
     try:
         user[0]

@@ -9,7 +9,7 @@
         <h1 class="mb-3">{{ competition.name }}</h1>
         <h4 class="mb-3">Created by: {{ competition.creator }}</h4>
         <h3>{{ competition.scramble }}</h3>
-        <button class="btn btn-primary" onclick="copyToClip('/comps/{{compeittion.comp_id}}')">Copy Share Link</button>
+        <button class="btn btn-primary" onclick="copyToClip('/comps/{{competition.comp_id}}')">Copy Share Link</button>
 
         <form action="/comps/{{ competition.comp_id }}" method="post">
             <input class="m-xxl-5 display-2 text-center" type="text" placeholder="Solve Time (mm.ss.ms)" name="time" autofocus autocomplete="off">
