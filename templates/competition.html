@@ -9,36 +9,37 @@
         <h1 class="mb-3">{{ competition.name }}</h1>
         <h4 class="mb-3">Created by: {{ competition.creator }}</h4>
         <h3>{{ competition.scramble }}</h3>
+        <button class="btn btn-primary" onclick="copyToClip('/comps/{{compeittion.comp_id}}')">Copy Share Link</button>
 
         <form action="/comps/{{ competition.comp_id }}" method="post">
             <input class="m-xxl-5 display-2 text-center" type="text" placeholder="Solve Time (mm.ss.ms)" name="time" autofocus autocomplete="off">
         </form>
-    {% endif %}
-    {% if solves %}
-        <table class="table table-dark table-striped">
-            <thead>
-                <th scope="col" class="text-start">Place</th>
-                <th scope="col" class="text-center">Solve Time</th>
-                <th scope="col" class="text-end">User</th>
-                <th scope="col" class="text-end"></th>
-            </thead>
-            <tbody>
-                {% for solve in solves %}
-                    <tr>
-                        <td class="text-start">{{ loop.index }}</td>
-                        <td class="text-center">{{ solve.time | solve_time }}</td>
-                        <td class="text-end"><a href="/users/{{solve.user_id}}">{{solve.username}}</a></td>
-                        <form action="/remove/{{ solve.comp_id }}" method="post">
-                            {% if session["user_id"] == solve.creator_id or session["user_id"] == solve.user_id %}
-                                <input name="solve_id" type="hidden" value="{{ solve.user_id }}">
-                                <td class="text-end"><button class="btn btn-danger">X</button></td>
-                            {% else  %}
-                                <td class="text-end"><button class="btn btn-danger" disabled>X</button></td>
-                            {% endif %}
-                        </form>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% if solves %}
+            <table class="table table-dark table-striped">
+                <thead>
+                    <th scope="col" class="text-start">Place</th>
+                    <th scope="col" class="text-center">Solve Time</th>
+                    <th scope="col" class="text-end">User</th>
+                    <th scope="col" class="text-end"></th>
+                </thead>
+                <tbody>
+                    {% for solve in solves %}
+                        <tr>
+                            <td class="text-start">{{ loop.index }}</td>
+                            <td class="text-center">{{ solve.time | solve_time }}</td>
+                            <td class="text-end"><a href="/users/{{solve.user_id}}">{{solve.username}}</a></td>
+                            <form action="/remove/{{ solve.comp_id }}" method="post">
+                                {% if session["user_id"] == solve.creator_id or session["user_id"] == solve.user_id %}
+                                    <input name="solve_id" type="hidden" value="{{ solve.user_id }}">
+                                    <td class="text-end"><button class="btn btn-danger">X</button></td>
+                                {% else  %}
+                                    <td class="text-end"><button class="btn btn-danger" disabled>X</button></td>
+                                {% endif %}
+                            </form>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     {% endif %}
 {% endblock %}
