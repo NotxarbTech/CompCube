@@ -3,6 +3,16 @@ body {
     background: linear-gradient(#141e30, #243b55) no-repeat fixed;
 }
 
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
 .login-box {
     position: absolute;
     top: 50%;
