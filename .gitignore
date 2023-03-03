@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Database for security purposes
-database.db
+*.db
 flask_session/
