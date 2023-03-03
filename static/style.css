@@ -1,15 +1,23 @@
 body {
-    background: #ADD8E6;
+    color: #fff;
+    background: linear-gradient(#141e30, #243b55) no-repeat fixed;
 }
 
-a {
-    color: white;
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    padding: 40px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
-a:link {
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+.login-box h2 {
+    text-align: center;
+    color: #fff;
+    margin: 0 0 30px;
+    padding: 0;
 }
