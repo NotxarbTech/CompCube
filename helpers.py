@@ -25,6 +25,8 @@ def get_msec(time_str):
 
 
 def format_time(time_msec):
+    if time_msec is None:
+        return None
     m = 0
     s = 0
     ms = 0
