@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, url_for, redirect, session
 from flask_session import Session
 from cs50 import SQL
-from pyTwistyScrambler import scrambler333
+from pyTwistyScrambler import scrambler222, scrambler333, scrambler444, scrambler555
 from werkzeug.security import check_password_hash, generate_password_hash
 import time
 
@@ -113,13 +113,23 @@ def newcomp():
     if request.method == "POST":
         comp_name = request.form.get("name")
         scramble = request.form.get("scramble")
+        puzzle = request.form.get("puzzle_type")
 
         if not comp_name:
             flash("Competition name cannot be blank")
             return redirect(url_for('newcomp'))
 
         if not scramble:
-            scramble = scrambler333.get_WCA_scramble()
+            if puzzle_type == 2:
+                scramble = scrambler222.get_WCA_scramble()
+            elif puzzle_type == 3:
+                scramble = scrambler333.get_WCA_scramble()
+            elif puzzle_type == 4:
+                scramble = scrambler444.get_WCA_scramble()
+            elif puzzle_type == 5:
+                scramble = scrambler555.get_WCA_scramble()
+            else:
+                scramble = scrambler333.get_WCA_scramble
 
         date_time = time.strftime("%m/%d/%Y %H:%M:%S", time.localtime())
 
