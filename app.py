@@ -113,32 +113,51 @@ def newcomp():
     if request.method == "POST":
         comp_name = request.form.get("name")
         scramble = request.form.get("scramble")
-        puzzle = request.form.get("puzzle_type")
+        puzzle_type = request.form.get("puzzle")
 
         if not comp_name:
             flash("Competition name cannot be blank")
             return redirect(url_for('newcomp'))
 
         if not scramble:
-            if puzzle_type == 2:
+            if puzzle_type == '2':
                 scramble = scrambler222.get_WCA_scramble()
-            elif puzzle_type == 3:
+            elif puzzle_type == '3':
                 scramble = scrambler333.get_WCA_scramble()
-            elif puzzle_type == 4:
+            elif puzzle_type == '4':
                 scramble = scrambler444.get_WCA_scramble()
-            elif puzzle_type == 5:
+            elif puzzle_type == '5':
                 scramble = scrambler555.get_WCA_scramble()
             else:
-                scramble = scrambler333.get_WCA_scramble
+                scramble = scrambler333.get_WCA_scramble()
 
         date_time = time.strftime("%m/%d/%Y %H:%M:%S", time.localtime())
 
-        db.execute("INSERT INTO competitions (name, scramble, datetime, creator_id) VALUES (?, ?, ?, ?)", comp_name,
-                   scramble, date_time, session["user_id"])
+        db.execute("INSERT INTO competitions (name, scramble, puzzle_type, datetime, creator_id) VALUES (?, ?, ?, ?, ?)", comp_name,
+                   scramble, f"{puzzle_type}x{puzzle_type}",date_time, session["user_id"])
 
         return redirect(url_for('index'))
 
     return render_template('newcomp.html')
+
+@app.route('/search')
+@login_required
+def search():
+    competitions = db.execute(
+        'SELECT name, comp_id as id, datetime as created_on, username as creator, users.id as user_id FROM competitions '
+        'JOIN users ON users.id = competitions.creator_id ORDER BY comp_id DESC')
+    searched = request.args.get('q')
+    results = []
+    for comp in competitions:
+        if len(results) >= 20:
+            break
+        elif searched.lower() in comp['name'].lower():
+            print(comp['name'] + " added to results")
+            results.append(comp)
+
+    print(results)
+
+    return render_template('search.html', results=results)
 
 
 @app.route('/comps/<comp_id>', methods=["GET", "POST"])
@@ -174,7 +193,7 @@ def comps(comp_id):
     except ValueError:
         return redirect(url_for('index'))
 
-    competition = db.execute('SELECT name, scramble, comp_id, username as creator, users.id as user_id FROM competitions '
+    competition = db.execute('SELECT name, scramble, comp_id, puzzle_type, username as creator, users.id as user_id FROM competitions '
                              'JOIN users ON competitions.creator_id = users.id '
                              'WHERE comp_id = ?', comp_id)
 

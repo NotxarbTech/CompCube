@@ -17,6 +17,9 @@
                 <th></th>
             </thead>
             <tbody>
+                <form action="/search" method="get">
+                    <input type="text" class="form-control mb-3 text-center" name="q" placeholder="Search for a competition.">
+                </form>
                 {% for comp in competitions %}
                     <tr>
                         <td class="text-start">{{comp.name}}</td>

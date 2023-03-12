@@ -8,6 +8,7 @@
     {% if competition %}
         <h1 class="mb-3">{{ competition.name }}</h1>
         <h4 class="mb-3">Created by: {{ competition.creator }}</h4>
+        <h4 class="mb-3">Puzzle Type: {{ competition.puzzle_type }}</h4>
         <h3>{{ competition.scramble }}</h3>
         <button class="btn btn-primary" onclick="copyToClip('/comps/{{competition.comp_id}}')">Copy Share Link</button>
 

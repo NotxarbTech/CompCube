@@ -4,14 +4,13 @@ body {
 }
 
 a {
-    color: #fff;
+    color: #ffffffc9;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
 }
-
 
 .login-box {
     position: absolute;

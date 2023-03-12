@@ -1,0 +1,36 @@
+{%  extends "layout.html" %}
+
+{% block title %}
+    Search
+{%  endblock %}
+
+{% block main %}
+    <h1 class="mb-3">Search</h1>
+    <h4>Create New Competition:</h4>
+    <a href="/newcomp"><button class="btn btn-primary btn-md mb-3">Create</button></a>
+    {% if results|length > 0 %}
+        <table class="table table-dark table-striped">
+            <thead>
+                <th class="text-start">Competition Name</th>
+                <th class="text-start">Creator</th>
+                <th class="text-end">Created on</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <form action="/search" method="get">
+                    <input type="text" class="form-control mb-3 text-center" name="q" placeholder="Search for a competition">
+                </form>
+                {% for comp in results %}
+                    <tr>
+                        <td class="text-start">{{comp.name}}</td>
+                        <td class="text-start"><a href="/users/{{comp.user_id}}">{{comp.creator}}</a></td>
+                        <td class="text-end">{{comp.created_on}}</td>
+                        <td><a href="/comps/{{comp.id}}"><button class="btn btn-primary">Go</button></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h1>Sorry, no results were found. <a href="/">Back to home page.</a></h1>
+    {% endif %}
+{% endblock %}
